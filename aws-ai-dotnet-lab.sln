@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "comprehend", "comprehend", "{7ABCA431-8810-4349-BEF4-CA3B505E7E0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "comprehend-action-lambda", "comprehend-action-lambda", "{06C3E874-DE6C-43CF-96BF-BF0A47017AF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{75DBDF7A-9D4B-48F4-B505-E1D8F3D3BC3B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "comprehend-action-lambda.Tests", "comprehend\comprehend-action-lambda\test\comprehend-action-lambda.Tests.csproj", "{2C37B504-1B6F-44FF-91A1-B27015B8575A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A9AA3B52-2EFD-425B-BBF1-600120807BC5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "comprehend-action-lambda", "comprehend\comprehend-action-lambda\src\comprehend-action-lambda.csproj", "{7DBE4109-7828-4817-8DBE-8F30EDA4A931}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C37B504-1B6F-44FF-91A1-B27015B8575A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C37B504-1B6F-44FF-91A1-B27015B8575A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C37B504-1B6F-44FF-91A1-B27015B8575A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C37B504-1B6F-44FF-91A1-B27015B8575A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DBE4109-7828-4817-8DBE-8F30EDA4A931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DBE4109-7828-4817-8DBE-8F30EDA4A931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DBE4109-7828-4817-8DBE-8F30EDA4A931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DBE4109-7828-4817-8DBE-8F30EDA4A931}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{06C3E874-DE6C-43CF-96BF-BF0A47017AF9} = {7ABCA431-8810-4349-BEF4-CA3B505E7E0A}
+		{75DBDF7A-9D4B-48F4-B505-E1D8F3D3BC3B} = {06C3E874-DE6C-43CF-96BF-BF0A47017AF9}
+		{2C37B504-1B6F-44FF-91A1-B27015B8575A} = {75DBDF7A-9D4B-48F4-B505-E1D8F3D3BC3B}
+		{A9AA3B52-2EFD-425B-BBF1-600120807BC5} = {06C3E874-DE6C-43CF-96BF-BF0A47017AF9}
+		{7DBE4109-7828-4817-8DBE-8F30EDA4A931} = {A9AA3B52-2EFD-425B-BBF1-600120807BC5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75CF4E4F-5BFA-47B1-9F0C-C16CF931DE7C}
+	EndGlobalSection
+EndGlobal
