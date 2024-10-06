@@ -34,16 +34,20 @@ public class LambdaEntryPoint
         {
             case ActionTypeConstants.DetectDominantLanguage:
                 return JsonSerializer.Serialize(await comprehend.DetectDominantLanguageAsync(requestBodyModel.Input));
+
             case ActionTypeConstants.DetectEntities:
                 return JsonSerializer.Serialize(await comprehend.DetectEntitiesAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+
             case ActionTypeConstants.DetectKeyPhrases:
-                return "";
-            case ActionTypeConstants.DetectSentiment:
-                return "";
-            case ActionTypeConstants.DetectSyntaxAnalysis:
-                return "";
+                return JsonSerializer.Serialize(await comprehend.DetectKeyPhrasesAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+
             case ActionTypeConstants.DetectPiiEntities:
-                return "";
+                return JsonSerializer.Serialize(await comprehend.DetectPiiAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+
+            case ActionTypeConstants.DetectSentiment:
+                return JsonSerializer.Serialize(await comprehend.DetectEntitiesAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+            case ActionTypeConstants.DetectSyntaxAnalysis:
+                return JsonSerializer.Serialize(await comprehend.DetectEntitiesAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
             default:
                 return "Invalid action type specified.";
         }

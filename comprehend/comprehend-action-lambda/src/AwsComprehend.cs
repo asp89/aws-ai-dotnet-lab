@@ -17,6 +17,9 @@ public class AwsComprehend
         _logger = loggerFactory.CreateLogger<AwsComprehend>();
     }
 
+    /// <summary>
+    /// A simple function that takes a string and detects dominant language.
+    /// </summary>
     public async Task<DetectDominantLanguageResponse?> DetectDominantLanguageAsync(string input)
     {
         try
@@ -38,24 +41,74 @@ public class AwsComprehend
         }
     }
 
-    public async Task<DetectEntitiesResponse?> DetectEntitiesAsync(string input, string languageCode = "EN")
+    /// <summary>
+    /// A simple function that takes a string and language code to detect entities.
+    /// </summary>
+    public async Task<DetectEntitiesResponse?> DetectEntitiesAsync(string input, string languageCode)
     {
-        DetectEntitiesResponse response = new();
         try
         {
             _logger.LogInformation("Detecting dominant language for input text.");
             var request = new DetectEntitiesRequest()
             {
                 Text = input,
-                LanguageCode = languageCode.ToLowerInvariant()
+                LanguageCode = string.IsNullOrEmpty(languageCode) ? "en" : languageCode.ToLowerInvariant()
             };
-            response = await _client.DetectEntitiesAsync(request);
+            DetectEntitiesResponse response = await _client.DetectEntitiesAsync(request);
             _logger.LogInformation("Language detection completed.");
             return response;
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error occurred while detecting entities.");
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// A simple function that takes a string and language code to detect key phrases.
+    /// </summary>
+    public async Task<DetectKeyPhrasesResponse?> DetectKeyPhrasesAsync(string input, string languageCode)
+    {
+        try
+        {
+            _logger.LogInformation("Detecting key phrases for input text.");
+            var request = new DetectKeyPhrasesRequest()
+            {
+                Text = input,
+                LanguageCode = string.IsNullOrEmpty(languageCode) ? "en" : languageCode.ToLowerInvariant()
+            };
+            DetectKeyPhrasesResponse response = await _client.DetectKeyPhrasesAsync(request);
+            _logger.LogInformation("Key Phrases detection completed.");
+            return response;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while detecting key phrases.");
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// A simple function that takes a string and language code to detect PII.
+    /// </summary>
+    public async Task<DetectPiiEntitiesResponse?> DetectPiiAsync(string input, string languageCode)
+    {
+        try
+        {
+            _logger.LogInformation("Detecting PII for input text.");
+            var request = new DetectPiiEntitiesRequest()
+            {
+                Text = input,
+                LanguageCode = string.IsNullOrEmpty(languageCode) ? "en" : languageCode.ToLowerInvariant()
+            };
+            DetectPiiEntitiesResponse response = await _client.DetectPiiEntitiesAsync(request);
+            _logger.LogInformation("PII detection completed.");
+            return response;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while detecting PII.");
             return null;
         }
     }
