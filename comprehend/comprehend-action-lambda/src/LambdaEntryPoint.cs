@@ -22,8 +22,7 @@ public class LambdaEntryPoint
     /// <summary>
     /// A simple function that takes a string and does a ToUpper
     /// </summary>
-    /// <param name="input">The string value for the Lambda function handler to process.</param>
-    /// <param name="actionType">The action type is a string for the Lambda function handler to process.</param>
+    /// <param name="requestBodyModel">The string value for the Lambda function handler to process.</param>
     /// <param name="context">The ILambdaContext that provides methods for logging and describing the Lambda environment.</param>
     /// <returns></returns>
     public async Task<string> FunctionHandler(ComprehendInput requestBodyModel, ILambdaContext context)
@@ -45,9 +44,11 @@ public class LambdaEntryPoint
                 return JsonSerializer.Serialize(await comprehend.DetectPiiAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
 
             case ActionTypeConstants.DetectSentiment:
-                return JsonSerializer.Serialize(await comprehend.DetectEntitiesAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                return JsonSerializer.Serialize(await comprehend.DetectSentimentAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+
             case ActionTypeConstants.DetectSyntaxAnalysis:
-                return JsonSerializer.Serialize(await comprehend.DetectEntitiesAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                return JsonSerializer.Serialize(await comprehend.DetectSyntaxAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+
             default:
                 return "Invalid action type specified.";
         }
