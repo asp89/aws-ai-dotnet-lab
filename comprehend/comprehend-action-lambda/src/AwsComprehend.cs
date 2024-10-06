@@ -1,7 +1,7 @@
 using Amazon.Comprehend;
 using Amazon.Comprehend.Model;
 using Microsoft.Extensions.Logging;
-using Models;
+
 namespace comprehendActionLambda;
 
 public class AwsComprehend

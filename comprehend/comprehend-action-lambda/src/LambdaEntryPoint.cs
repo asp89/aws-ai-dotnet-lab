@@ -28,29 +28,47 @@ public class LambdaEntryPoint
     public async Task<string> FunctionHandler(ComprehendInput requestBodyModel, ILambdaContext context)
     {
         _logger.LogInformation("Lambda Function Started");
-        var comprehend = new AwsComprehend();
+
+        if (string.IsNullOrEmpty(requestBodyModel.Input))
+        {
+            return "Input text cannot be empty";
+        }
+
+        AwsComprehend comprehend = new AwsComprehend();
+        string result = string.Empty;
+
         switch (requestBodyModel.ActionType.ToLower())
         {
             case ActionTypeConstants.DetectDominantLanguage:
-                return JsonSerializer.Serialize(await comprehend.DetectDominantLanguageAsync(requestBodyModel.Input));
+                result = JsonSerializer.Serialize(await comprehend.DetectDominantLanguageAsync(requestBodyModel.Input));
+                break;
 
             case ActionTypeConstants.DetectEntities:
-                return JsonSerializer.Serialize(await comprehend.DetectEntitiesAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                result = JsonSerializer.Serialize(await comprehend.DetectEntitiesAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                break;
 
             case ActionTypeConstants.DetectKeyPhrases:
-                return JsonSerializer.Serialize(await comprehend.DetectKeyPhrasesAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                result = JsonSerializer.Serialize(await comprehend.DetectKeyPhrasesAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                break;
 
             case ActionTypeConstants.DetectPiiEntities:
-                return JsonSerializer.Serialize(await comprehend.DetectPiiAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                result = JsonSerializer.Serialize(await comprehend.DetectPiiAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                break;
 
             case ActionTypeConstants.DetectSentiment:
-                return JsonSerializer.Serialize(await comprehend.DetectSentimentAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                result = JsonSerializer.Serialize(await comprehend.DetectSentimentAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                break;
 
             case ActionTypeConstants.DetectSyntaxAnalysis:
-                return JsonSerializer.Serialize(await comprehend.DetectSyntaxAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                result = JsonSerializer.Serialize(await comprehend.DetectSyntaxAsync(requestBodyModel.Input, requestBodyModel.LanguageCode));
+                break;
 
             default:
-                return "Invalid action type specified.";
+                result = "Invalid action type specified.";
+                break;
         }
+
+        _logger.LogInformation("Lambda Function Completed");
+        return result;
     }
 }
